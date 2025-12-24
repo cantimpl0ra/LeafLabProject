@@ -1,3 +1,8 @@
+/***********************************************************************
+   MQTT CONNECTION TEST - LEAF LAB PROJECT
+   You have to input the mqtt setup configuration one by one.
+ ***********************************************************************/
+
 #include <Arduino_MKRIoTCarrier.h>
 #include <WiFiNINA.h>
 #include <ArduinoMqttClient.h>
@@ -12,13 +17,13 @@ String wifiSSID = "";
 String wifiPASS = "";
 String brokerIP = "";
 
-void pedirConfiguracion() {
-  Serial.println("\n=== CONFIGURACION MQTT ===");
-  Serial.println("Introduce:");
-  Serial.println("SSID=tu_wifi");
-  Serial.println("PASS=tu_password");
-  Serial.println("IP=ip_broker");
-  Serial.println("Escribe START para comenzar\n");
+void askConfig() {
+  Serial.println("\n=== MQTT CONFIGURATION ===");
+  Serial.println("Enter:");
+  Serial.println("SSID=your_wifi");
+  Serial.println("PASS=your_password");
+  Serial.println("IP=broker_ip");
+  Serial.println("Type START to begin\n");
 
   while (true) {
     if (Serial.available()) {
@@ -27,21 +32,21 @@ void pedirConfiguracion() {
 
       if (line.startsWith("SSID=")) {
         wifiSSID = line.substring(5);
-        Serial.println("SSID guardado");
+        Serial.println("SSID saved");
       }
       else if (line.startsWith("PASS=")) {
         wifiPASS = line.substring(5);
-        Serial.println("Password guardado");
+        Serial.println("Password saved");
       }
       else if (line.startsWith("IP=")) {
         brokerIP = line.substring(3);
-        Serial.println("IP broker guardada");
+        Serial.println("Broker IP saved");
       }
       else if (line == "START") {
         if (wifiSSID != "" && wifiPASS != "" && brokerIP != "") {
           break;
         } else {
-          Serial.println("Faltan datos!");
+          Serial.println("Missing data!");
         }
       }
     }
@@ -54,10 +59,10 @@ void setup() {
 
   carrier.begin();
 
-  pedirConfiguracion();
+  askConfig();
 
   // --- WIFI ---
-  Serial.print("Conectando a WiFi...");
+  Serial.print("Connecting to WiFi...");
   WiFi.begin(wifiSSID.c_str(), wifiPASS.c_str());
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -66,7 +71,7 @@ void setup() {
   Serial.println(" OK");
 
   // --- MQTT ---
-  Serial.print("Conectando al broker MQTT...");
+  Serial.print("Connecting to MQTT broker...");
   if (!mqttClient.connect(brokerIP.c_str(), 1883)) {
     Serial.println(" ERROR");
     while (1);
@@ -78,9 +83,9 @@ void loop() {
   mqttClient.poll();
 
   mqttClient.beginMessage("invernadero/test");
-  mqttClient.print("Hola desde MKR IoT Carrier");
+  mqttClient.print("Hello from MKR IoT Carrier");
   mqttClient.endMessage();
 
-  Serial.println("Mensaje MQTT enviado");
+  Serial.println("MQTT message sent");
   delay(5000);
 }
