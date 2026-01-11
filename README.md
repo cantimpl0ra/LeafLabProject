@@ -27,16 +27,9 @@ ACATUADOR = NC
 
 ===== LLINDARS ACTIVACIÓ =====
 
-FASE | DURACIÓN                  | TEMPERATURA (°C)                                     | HUMEDAD (%)                                           |
------|---------------------------|------------------------------------------------------|-------------------------------------------------------|
-1    | Plántula (7–10 días)      | < 20  → Activar calefactor                           | > 75 → Activar deshumidificador (IoT relay)           |
-     |                           |                                                      | < 65 → Activar humidificador (I2C relay)              |
------|---------------------------|------------------------------------------------------|-------------------------------------------------------|
-2    | Crecimiento vegetativo    | > 24 → No permitido                                  | > 70 → Activar deshumidificador (IoT relay)           |
-     | (2–4 semanas)             | < 20 → Activar calefactor                            | < 55 → Activar humidificador (I2C relay)              |
------|---------------------------|------------------------------------------------------|-------------------------------------------------------|
-3    | Prefloración              | > 26 → Activar refrigerador “Pingüino” (IoT)         | Deshumidificador siempre activo (IoT always on)       |
-     | (1–2 semanas)             | < 18 → Activar calefactor                            | < 50 → Activar humidificador                          |
------|---------------------------|------------------------------------------------------|-------------------------------------------------------|
-4    | Floración                 | > 26  → Activar refrigerador “Pingüino” (IoT)        | Deshumidificador siempre activo (IoT always on)       |
-     | (4–7 semanas)             | < 18 → Activar calefactor                            | < 40 → Activar humidificador                          |
+| FASE | ETAPA (DURACIÓN) | TEMPERATURA (°C) | HUMEDAD (%) |
+| :---: | :--- | :--- | :--- |
+| **1** | **Plántula**<br>*(7–10 días)* | **< 20** → Activar calefactor | **> 75** → Activar deshumidificador (IoT relay)<br>**< 65** → Activar humidificador (I2C relay) |
+| **2** | **Crecimiento vegetativo**<br>*(2–4 semanas)* | **> 24** → No permitido<br>**< 20** → Activar calefactor | **> 70** → Activar deshumidificador (IoT relay)<br>**< 55** → Activar humidificador (I2C relay) |
+| **3** | **Prefloración**<br>*(1–2 semanas)* | **> 26** → Activar refrigerador “Pingüino” (IoT)<br>**< 18** → Activar calefactor | **Siempre activo** → Deshumidificador (IoT)<br>**< 50** → Activar humidificador |
+| **4** | **Floración**<br>*(4–7 semanas)* | **> 26** → Activar refrigerador “Pingüino” (IoT)<br>**< 18** → Activar calefactor | **Siempre activo** → Deshumidificador (IoT)<br>**< 40** → Activar humidificador |
