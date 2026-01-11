@@ -1,4 +1,0 @@
-https://docs.arduino.cc/tutorials/mkr-iot-carrier/smart-garden-project/
-
-
-https://docs.m5stack.com/en/arduino/projects/unit/unit_pahub - - I2C PaHUB
