@@ -605,10 +605,25 @@ void printValueAt(int x, int y, const String &val, int w = 120, int h = 18) {
   carrier.display.print(val);
 }
 
+// ✅ NUEVO: imprimir valor con color (limpia el rectángulo antes)
+void printValueAtColored(int x, int y, const String &val, uint16_t color, int w = 120, int h = 18) {
+  carrier.display.fillRect(x, y, w, h, ST77XX_BLACK);
+  carrier.display.setTextColor(color);
+  carrier.display.setCursor(x, y);
+  carrier.display.print(val);
+}
+
+// ✅ NUEVO: color según estado (AUTO ON azul, AUTO OFF rojo, MANU ON verde)
+uint16_t actuatorColor(const Actuator &a) {
+  if (a.manual) return ST77XX_GREEN;         // MANU ON (y si hubiese MANU OFF, también verde)
+  return a.state ? ST77XX_BLUE : ST77XX_RED; // AUTO ON / AUTO OFF
+}
+
 void updateScreen(float t, float h, uint16_t soil) {
   carrier.display.setTextSize(2);
-  carrier.display.setTextColor(ST77XX_WHITE);
 
+  // Sensores siempre en blanco
+  carrier.display.setTextColor(ST77XX_WHITE);
   printValueAt(70, 30,  String(phase));
   printValueAt(40, 55,  String(t, 1) + "C");
   printValueAt(40, 80,  String(h, 1) + "%");
@@ -618,10 +633,14 @@ void updateScreen(float t, float h, uint16_t soil) {
     return String(a.manual ? "MAN" : "AUT") + " " + String(a.state ? "ON" : "OFF");
   };
 
-  printValueAt(70, 135, modeTxt(pump));
-  printValueAt(70, 155, modeTxt(humid));
-  printValueAt(70, 175, modeTxt(heater));
-  printValueAt(70, 195, modeTxt(iot));
+  // Actuadores en color según tu regla
+  printValueAtColored(70, 135, modeTxt(pump),   actuatorColor(pump));
+  printValueAtColored(70, 155, modeTxt(humid),  actuatorColor(humid));
+  printValueAtColored(70, 175, modeTxt(heater), actuatorColor(heater));
+  printValueAtColored(70, 195, modeTxt(iot),    actuatorColor(iot));
+
+  // Deja el color en blanco para evitar “herencias” raras en futuras impresiones
+  carrier.display.setTextColor(ST77XX_WHITE);
 }
 
 /* ================= SETUP ================= */
