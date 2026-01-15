@@ -1,0 +1,51 @@
+[
+    {
+        "id": "125df8b22aec7e95",
+        "type": "ui_text",
+        "z": "abb399a504011267",
+        "group": "4d340e43427f1455",
+        "order": 1,
+        "width": "12",
+        "height": "2",
+        "name": "",
+        "label": "PHASE   ",
+        "format": "{{value}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4d340e43427f1455",
+        "type": "ui_group",
+        "name": "Sensors",
+        "tab": "bf7e609443e01c71",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bf7e609443e01c71",
+        "type": "ui_tab",
+        "name": "Leaf Lab",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1895078970f6b1d2",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
