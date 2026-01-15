@@ -18,14 +18,14 @@ BOTON 02 = HEAT = RELAY 2
 
 BOTON 03 = IOT RELAY = RELAY 3
 
-== CABLEAJAT ==
+== CABLEAJAT RELAY ==
 
 POWER = COM
 
 ACATUADOR = NC
 
 
-===== LLINDARS ACTIVACIÓ =====
+===== LLINDARS ACTIVACIÓ ACTUADORS =====
 
 | FASE | ETAPA (DURACIÓN) | TEMPERATURA (°C) | HUMEDAD (%) |
 | :---: | :--- | :--- | :--- |
