@@ -1,0 +1,251 @@
+[
+    {
+        "id": "abb399a504011267",
+        "type": "tab",
+        "label": "Leaf Lab - - Sensors",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b80700281561e589",
+        "type": "mqtt in",
+        "z": "abb399a504011267",
+        "name": "",
+        "topic": "leaflab/state/sensors",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "df67302e9479c9e2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "494cec6de3996e19",
+                "33f2c38fc79a86ea"
+            ]
+        ]
+    },
+    {
+        "id": "125df8b22aec7e95",
+        "type": "ui_text",
+        "z": "abb399a504011267",
+        "group": "4d340e43427f1455",
+        "order": 1,
+        "width": "12",
+        "height": "2",
+        "name": "",
+        "label": "PHASE   ",
+        "format": "{{value}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "38c1e6209c46c4b5",
+        "type": "ui_gauge",
+        "z": "abb399a504011267",
+        "name": "",
+        "group": "4d340e43427f1455",
+        "order": 2,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "temp",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "55",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 890,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "cd979e3ef6858e25",
+        "type": "ui_gauge",
+        "z": "abb399a504011267",
+        "name": "",
+        "group": "4d340e43427f1455",
+        "order": 3,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "humid",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 890,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "494cec6de3996e19",
+        "type": "debug",
+        "z": "abb399a504011267",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "33f2c38fc79a86ea",
+        "type": "function",
+        "z": "abb399a504011267",
+        "name": "function 1",
+        "func": "const d = msg.payload || {};\n\nconst msgTemp = { ...msg, payload: Number(d.temp) };\nconst msgHum = { ...msg, payload: Number(d.hum) };\nconst msgSoil = { ...msg, payload: Number(d.soil) };\nconst msgPhase = { ...msg, payload: Number(d.phase) };\n\nreturn [msgTemp, msgHum, msgSoil, msgPhase];\n",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 300,
+        "wires": [
+            [
+                "38c1e6209c46c4b5"
+            ],
+            [
+                "cd979e3ef6858e25"
+            ],
+            [
+                "cfdd76440911ecb4"
+            ],
+            [
+                "125df8b22aec7e95"
+            ]
+        ],
+        "inputLabels": [
+            "1"
+        ],
+        "outputLabels": [
+            "4",
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": "cfdd76440911ecb4",
+        "type": "ui_gauge",
+        "z": "abb399a504011267",
+        "name": "",
+        "group": "4d340e43427f1455",
+        "order": 4,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "soil",
+        "label": "number",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 890,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "df67302e9479c9e2",
+        "type": "mqtt-broker",
+        "name": "Leaf Lab",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4d340e43427f1455",
+        "type": "ui_group",
+        "name": "Sensors",
+        "tab": "bf7e609443e01c71",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bf7e609443e01c71",
+        "type": "ui_tab",
+        "name": "Leaf Lab",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c3be93f1856ee985",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
